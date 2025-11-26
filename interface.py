@@ -119,6 +119,7 @@ class ApplicationTri:
                                     foreground='#2c5aa0')
         self.label_stats.pack(pady=5)
         
+        
         # Résultats
         ttk.Label(section_resultats, text="Données triées:").pack(anchor=tk.W)
         self.texte_resultats = scrolledtext.ScrolledText(section_resultats, height=20, width=100)
