@@ -23,6 +23,6 @@ git clone https://github.com/votre-repo/data-sort-pro.git
 cd data-sort-pro
 python main.py
 # Équipe
-ADEL Mahmoud • Matthieu Tholisano • Alan Delage • MANFREDONIA Dimitri • EUSTACHE--MARTIN Mathys
+ADEL Mahmoud • Matthieu Tolisano • Alan Delage • MANFREDONIA Dimitri • EUSTACHE--MARTIN Mathys
 
 Projet académique - Développement Python avec assistance IA
