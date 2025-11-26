@@ -1,13 +1,13 @@
 #!/usr/bin/env python3
 """
-Programme de tri de données - Point d'entrée principal
-Version avec interface graphique simple
+Programme de Tri de Données
+Point d'entrée principal
 """
 
-from tri_interface import ApplicationTri
+from interface import ApplicationTri
 
 def main():
-    """Début du programme - Point d'entrée principal"""
+    """Lance l'application de tri"""
     app = ApplicationTri()
     app.demarrer()
 

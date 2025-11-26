@@ -1,0 +1,7 @@
+[
+  {"nom": "Laptop", "prix": 999, "stock": 15, "categorie": "Electronique"},
+  {"nom": "Smartphone", "prix": 699, "stock": 30, "categorie": "Electronique"},
+  {"nom": "Livre", "prix": 25, "stock": 100, "categorie": "Culture"},
+  {"nom": "Café", "prix": 8, "stock": 50, "categorie": "Alimentation"},
+  {"nom": "Chaise", "prix": 120, "stock": 20, "categorie": "Mobilier"}
+]

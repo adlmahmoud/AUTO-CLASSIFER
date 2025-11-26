@@ -1,7 +1,0 @@
-[
-  {"nom": "Alice", "age": 28, "ville": "Paris", "salaire": 35000},
-  {"nom": "Bob", "age": 32, "ville": "Lyon", "salaire": 42000},
-  {"nom": "Charlie", "age": 25, "ville": "Marseille", "salaire": 28000},
-  {"nom": "Diana", "age": 35, "ville": "Paris", "salaire": 50000},
-  {"nom": "Eve", "age": 29, "ville": "Lille", "salaire": 32000}
-]
