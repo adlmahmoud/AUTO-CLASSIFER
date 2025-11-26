@@ -1,4 +1,4 @@
-# -COMPRESSOR
+# AUTO CLASSIFER
 # 🚀 DataSort Pro - Application de Tri Intelligent
 
 ![Python](https://img.shields.io/badge/Python-3.8+-blue.svg)
