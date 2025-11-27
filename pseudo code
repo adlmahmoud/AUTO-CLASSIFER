@@ -1,0 +1,161 @@
+DEBUT PROGRAMME
+    CREER fenêtre_principale
+    CONFIGURER titre = "Tri de Données"
+    CONFIGURER taille = 900x750
+    
+    // Variables globales
+    données_chargées = []
+    données_triées = []
+    clés_disponibles = []
+    
+    FONCTION créer_interface()
+        // Section 1: Chargement
+        CRÉER section_chargement = "Chargement des Données"
+        AJOUTER bouton_csv → APPELER charger_csv()
+        AJOUTER bouton_json → APPELER charger_json()  
+        AJOUTER bouton_manuel → APPELER saisie_manuelle()
+        AJOUTER zone_texte_données
+        
+        // Section 2: Configuration
+        CRÉER section_config = "Configuration du Tri"
+        AJOUTER dropdown_critères ← clés_disponibles
+        AJOUTER boutons_radio_ordre (croissant/décroissant)
+        AJOUTER boutons_radio_algo (insertion/bulles)
+        AJOUTER bouton_lancer_tri → APPELER executer_tri()
+        
+        // Section 3: Résultats
+        CRÉER section_résultats = "Résultats du Tri"
+        AJOUTER label_statistiques
+        AJOUTER zone_texte_résultats
+        
+    FIN FONCTION
+    
+    FONCTION charger_csv(chemin_fichier)
+        ESSAYER
+            OUVRIRE fichier CSV
+            LIRE données avec DictReader
+            données_chargées = données_lues
+            clés_disponibles = clés de la première ligne
+            METTRE À JOUR interface()
+            AFFICHER "Succès: X enregistrements chargés"
+        SINON
+            AFFICHER "Erreur de chargement"
+        FIN ESSAYER
+    FIN FONCTION
+    
+    FONCTION charger_json(chemin_fichier)
+        ESSAYER
+            OUVRIRE fichier JSON  
+            CHARGER données JSON
+            données_chargées = données
+            clés_disponibles = clés du premier objet
+            METTRE À JOUR interface()
+            AFFICHER "Succès: X enregistrements chargés"
+        SINON
+            AFFICHER "Erreur de chargement JSON"
+        FIN ESSAYER
+    FIN FONCTION
+    
+    FONCTION saisie_manuelle()
+        OUVRIRE fenêtre_saisie
+        AFFICHER instructions format
+        QUAND utilisateur valide:
+            POUR chaque ligne saisie:
+                SÉPARER par virgules
+                POUR chaque paire clé=valeur:
+                    AJOUTER à dictionnaire
+                AJOUTER dictionnaire à données_chargées
+            METTRE À JOUR interface()
+    FIN FONCTION
+    
+    FONCTION executer_tri()
+        SI données_chargées est VIDE ALORS
+            AFFICHER "Chargez d'abord des données"
+            RETOURNER
+        FIN SI
+        
+        critère = valeur_dropdown_critères
+        ordre = valeur_boutons_ordre
+        algorithme = valeur_boutons_algo
+        
+        DÉBUT CHRONOMÈTRE
+        
+        SI algorithme = "insertion" ALORS
+            données_triées, stats = TRI_INSERTION(données_chargées, critère, ordre)
+        SINON SI algorithme = "bulles" ALORS
+            données_triées, stats = TRI_BULLES(données_chargées, critère, ordre)
+        FIN SI
+        
+        ARRÊTER CHRONOMÈTRE
+        
+        AFFICHER données_triées dans zone_résultats
+        AFFICHER statistiques dans label_statistiques
+    FIN FONCTION
+    
+    // Algorithmes de tri
+    FONCTION TRI_INSERTION(liste, clé, croissant)
+        initialiser compteur_comparaisons = 0
+        initialiser compteur_permutations = 0
+        
+        liste_triée = copie de liste
+        
+        POUR i DE 1 À longueur(liste_triée)-1
+            élément_courant = liste_triée[i]
+            j = i - 1
+            
+            TANT QUE j >= 0
+                compteur_comparaisons += 1
+                
+                SI croissant ALORS
+                    condition = liste_triée[j][clé] > élément_courant[clé]
+                SINON
+                    condition = liste_triée[j][clé] < élément_courant[clé]
+                FIN SI
+                
+                SI condition ALORS
+                    compteur_permutations += 1
+                    liste_triée[j+1] = liste_triée[j]
+                    j = j - 1
+                SINON
+                    SORTIR DE BOUCLE
+                FIN SI
+            FIN TANT QUE
+            
+            liste_triée[j+1] = élément_courant
+        FIN POUR
+        
+        RETOURNER liste_triée, statistiques
+    FIN FONCTION
+    
+    FONCTION TRI_BULLES(liste, clé, croissant)
+        initialiser compteur_comparaisons = 0
+        initialiser compteur_permutations = 0
+        
+        liste_triée = copie de liste
+        n = longueur(liste_triée)
+        
+        POUR i DE 0 À n-1
+            POUR j DE 0 À n-i-2
+                compteur_comparaisons += 1
+                
+                SI croissant ALORS
+                    condition = liste_triée[j][clé] > liste_triée[j+1][clé]
+                SINON
+                    condition = liste_triée[j][clé] < liste_triée[j+1][clé]
+                FIN SI
+                
+                SI condition ALORS
+                    compteur_permutations += 1
+                    ÉCHANGER liste_triée[j] et liste_triée[j+1]
+                FIN SI
+            FIN POUR
+        FIN POUR
+        
+        RETOURNER liste_triée, statistiques
+    FIN FONCTION
+    
+    // Programme principal
+    APPELER créer_interface()
+    LANCER boucle_principale fenêtre
+    
+FIN PROGRAMME
